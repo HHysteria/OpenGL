@@ -1,0 +1,77 @@
+#ifndef __OPENGL_MAIN_H__
+#define __OPENGL_MAIN_H__
+
+#include <Windows.h>
+#include <GL\glew.h>
+#include <GL\freeglut.h>
+#include <iostream>
+
+using namespace std;
+
+#endif // __OPENGL_MAIN_H__
+
+//Funny "Joke"
+void display() {
+	// Set color of background (def=black) to Yellow
+	glClearColor(0, 0, 0, 0.0);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);  //or GL_PROJECTION) if you want to affect the projection mat
+	glLoadIdentity();//has to be at beg of any prog that has transformations
+	glLineWidth(2);
+	//Axes (Blue)
+	glColor3f(1.0, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex3f(0.75f, 1.0f, 0.0f);  // Top right
+    glVertex3f(0.5f, 0.5f, 0.0f);  // Bottom right
+    glVertex3f(-0.25f, 0.5f, 0.0f); // Bottom left
+    glVertex3f(-0.25f, 1.0f, 0.0f); // Top left
+
+    // Second Quadrilateral
+    glVertex3f(-0.25f, 1.0f, 0.0f); // Top left
+    glVertex3f(-0.25f, -1.0f, 0.0f); // Bottom left
+    glVertex3f(0.25f, -1.0f, 0.0f); // Bottom right
+    glVertex3f(0.25f, 1.0f, 0.0f); // Top right
+
+    // Third Quadrilateral
+    glVertex3f(-0.75f, -1.0f, 0.0f); // Bottom left
+    glVertex3f(-0.5f, -0.5f, 0.0f); // Top left
+    glVertex3f(0.25f, -0.5f, 0.0f); // Top right
+	glVertex3f(0.25f, -1.0f, 0.0f);
+
+	// Fourth Quadrilateral
+	glVertex3f(1.0f, 0.25f, 0.0f); // Top right
+	glVertex3f(1.0f, -0.25f, 0.0f); // Bottom right
+	glVertex3f(-1.0f, -0.25f, 0.0f); // Bottom left
+	glVertex3f(-1.0f, 0.25f, 0.0f); // Top left
+
+	// Fifth Quadrilateral
+	glVertex3f(1.0f, 0.25f, 0.0f); // Top right
+	glVertex3f(1.0f, -0.75f, 0.0f); // Bottom right
+	glVertex3f(0.75f, -0.5f, 0.0f); // Bottom left
+	glVertex3f(0.75f, 0.25f, 0.0f); // Top left
+
+	glVertex3f(-1.0f, -0.25f, 0.0f); // Top right
+	glVertex3f(-1.0f, 0.75f, 0.0f); // Bottom right
+	glVertex3f(-0.75f, 0.5f, 0.0f); // Bottom left
+	glVertex3f(-0.75f, -0.25f, 0.0f); // Top left
+	glEnd();
+	glFlush();
+}
+
+
+int main(int argc, char* argv[]) {
+
+	// Initialize GLUT
+	glutInit(&argc, argv);
+
+	// Set the window size
+	glutInitWindowSize(800, 600);
+	// Create the window with the title "Hello,GL"
+	glutCreateWindow("Hello, GL");
+	// Bind the two functions (above) to respond when necessary
+	glutDisplayFunc(display);
+
+	// To avoid window to be closed
+	glutMainLoop();
+	return 0;
+}
